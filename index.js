@@ -10,7 +10,6 @@ const localPkg = require("./package.json");
 
 const configPath = "./config.json";
 
-// Auto-update check
 async function checkForUpdate() {
   try {
     const { data: remotePkg } = await axios.get(
@@ -39,7 +38,6 @@ async function checkForUpdate() {
   }
 }
 
-// Load all tokens
 const tokens = Object.entries(process.env)
   .filter(([key]) => key.startsWith("TOKEN"))
   .map(([_, value]) => value);
@@ -53,7 +51,6 @@ let saved = {
   userName: ""
 };
 
-// Load or create config
 if (fs.existsSync(configPath)) {
   try {
     const file = fs.readFileSync(configPath, "utf8");
@@ -67,7 +64,6 @@ if (fs.existsSync(configPath)) {
   console.log("🆕 Config file created.\n");
 }
 
-// Prompt helpers
 async function askWithDefault(message, defaultValue) {
   const answer = await inquirer.prompt([
     {
